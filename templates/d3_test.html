@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "header.html" %}
+    <title>D3 Testing Page</title>
+</head>
+<body>
+    <h1>See the testing animation below</h1>
+    <svg width='500' height='500'></svg>
+    
+    <button onclick="randomize();" class="btn btn-warning">Randomize The Rectangle!</button>
+    <a href="/" class="btn btn-warning" role="button">Home</a>
+    {% include "footer.html" %}
+    <script>
+        var svg = d3.select('svg');
+        var data = [];
+        for(var i=0;i<10;i++){
+            svg.append('rect')
+            .attr('x', 20)
+            .attr('y', 100+20*i)
+            .attr('width', 200)
+            .attr('height', 100)
+            .attr('fill', '#30852040');
+            data.push(0);
+        }
+
+
+        function randomize(){
+            svg.selectAll('rect')
+            .data(data)
+            .transition()
+            .delay(function(d, i){return i*75})
+            .attr("y", function(d, i){return Math.random()*50*i});
+        }
+
+    </script>
+</body>
+</html>

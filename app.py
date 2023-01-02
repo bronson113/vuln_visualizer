@@ -25,6 +25,10 @@ def compile_code():
     result = "An error occured during compilation"
   return render_template('compile.html', result=result)
 
+@app.route("/d3")
+def d3_test():
+  return render_template('d3_test.html')
+
 
 if __name__ == "__main__":
   app.run()
