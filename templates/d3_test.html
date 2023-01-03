@@ -6,10 +6,19 @@
 </head>
 <body>
     <h1>See the testing animation below</h1>
-    <svg width='500' height='500'></svg>
+    <!-- horizontally center the svg -->
+    <div style="text-align: center;">
+        <svg width='500' height='500'></svg>
+    </div>
+    <br />
+
+    <!-- in a different line put the following two button and center them-->
+    <div style="text-align: center;">
+        <button onclick="randomize();" class="btn btn-warning">Randomize The Rectangle!</button>
+        <a href="/" class="btn btn-warning" role="button">Home</a>
+    </div>
     
-    <button onclick="randomize();" class="btn btn-warning">Randomize The Rectangle!</button>
-    <a href="/" class="btn btn-warning" role="button">Home</a>
+    
     {% include "footer.html" %}
     <script>
         var svg = d3.select('svg');
