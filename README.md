@@ -2,8 +2,17 @@
 
 This is a tool to interactively visualize the vulnerabilities in a given c source. It is a work in progress.
 
+## Requirements
+
+- Python 3.6
+- Flask
+- GCC
+
+see `requirements.txt` for more information
+
 ## Usage
 
+### Web application UI
 Start the project using python:
 
 ```bash
@@ -11,6 +20,14 @@ python app.py
 ```
 
 Then navigate to the given url in your browser.
+
+
+### Interactive compiler
+To run the interactive compiler, use the following command:
+
+```bash
+python vuln_compile/interpreter.py
+```
 
 ## Components
 
@@ -26,11 +43,14 @@ Flask is used to serve the frontend and provide an API for the frontend to inter
 
 The compiler is a python script that takes a c source file and add helper information for the program to identify the stack and heap layout. It also proxy to the gcc compiler to compile to a binary that's used to attach with ptrace.
 
+
+
 ## File Structure
 
 - `app.py` - The main flask app
 - `vuln_compile/` - The compiler
     - `vuln_compiler.py` - The compiler
+    - `intepreter.py` - Interactive compiler test
 - `template/` - The frontend
     - `index.html` - The main page
     - `d3_test.html` - A test for d3.js
