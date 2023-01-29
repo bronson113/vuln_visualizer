@@ -17,22 +17,30 @@ def interactive_prompt():
     code_base = ""
     while True:
         try:
-            code = input(">>> ")
-            if code == "exit":
+            code = input(">>> ").strip()
+            command = code.split(" ")[0]
+            if command in ["exit", "quit"]:
+                print("Resulting code:")
+                print(create_template(includes, code_base))
+                print("Exiting...")
                 break
 
-            elif code == "run":
-                result = process(create_template(includes, code_base))
-                print(result)
+            elif command == "run":
+                result, return_code = process(create_template(includes, code_base))
+                if return_code != 0:
+                    print(f"Program exit with error: {return_code}")
+                else:
+                    print(result)
 
-            elif code == "clear":
+            elif command == "clear":
                 includes = ""
                 code_base = ""
             
-            elif code == "show":
+            elif command == "show":
+                print("Current code:")
                 print(create_template(includes, code_base))
 
-            elif code == "help":
+            elif command == "help":
                 print("""
 run: run the code
 clear: clear the code
@@ -44,13 +52,27 @@ help: show this message
 """)
 
 
-            elif "#include" in code.replace(" ", ""):
-                includes += code + "\n"
+            elif command == "#include" or command == "include":
+                body = code.split(" ")[1:]
+                includes += "#include" + " ".join(body) + "\n"
+
+            elif "=" not in code:
+                # no assignment in the current code, user is evaluating a varible / expression
+                # add printf to the end of the code, and don't save the current line
+                cur_code_base = code_base + f"printf(\"\\n\\n%d\", {code});\n"
+                result, return_code = process(create_template(includes, cur_code_base))
+                print(result.split(b"\n")[-1].decode())
 
             else:
-                code_base += code + "\n"
+                # add semicolon to the end for the user
+
+                # TODO: add implicit type conversion / type inference
+                # TODO: multiline input support (or scope tracking)
+                # TODO: change code to printf if it's a simple expression
+                code_base += "\t" + code + ";\n"
             
         except Exception as e:
+            print(e)
             print("An error occured during compilation")
 
 if __name__ == "__main__":
