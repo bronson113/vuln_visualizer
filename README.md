@@ -1,9 +1,10 @@
 # Vuln Visualizer
 
-This is a tool to interactively visualize the vulnerabilities in a given c source. It is a work in progress.
+Vuln visualizer is a tool to interactively visualize the vulnerabilities in a given c source. 
 
 ## Requirements
 
+- *nix enviornment (Tested on Windows WSL 2)
 - Python 3.6
 - Flask
 - GCC
@@ -66,6 +67,7 @@ The compiler is a python script that takes a c source file and add helper inform
 
 - [ ] Compiler
     - [x] Proxy to gcc
+    - [ ] Cross platform support
     - [ ] Add stack and heap information
     - [ ] Extend C syntax for easy vulnerability production / identification
 - [ ] Backend

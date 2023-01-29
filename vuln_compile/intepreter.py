@@ -16,7 +16,7 @@ def interactive_prompt():
     includes = ""
     code_base = ""
     while True:
-        try:
+       # try:
             code = input(">>> ").strip()
             command = code.split(" ")[0]
             if command in ["exit", "quit"]:
@@ -71,9 +71,9 @@ help: show this message
                 # TODO: change code to printf if it's a simple expression
                 code_base += "\t" + code + ";\n"
             
-        except Exception as e:
-            print(e)
-            print("An error occured during compilation")
+      #  except Exception as e:
+       #     print(e)
+       #     print("An error occured during compilation")
 
 if __name__ == "__main__":
     interactive_prompt()
